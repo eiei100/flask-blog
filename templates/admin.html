@@ -1,0 +1,44 @@
+    {% extends "base.html" %}
+    {% block title %}
+    管理ページ
+    {% endblock %}
+    {% block content %}
+    <div class="container my-4">
+        <div class="text-center mb-4">
+            <h2>えいえいダイアリー</h2>
+            <p>近況報告などゆるく書いています。
+            <br>勉強したこととか、日々のちょっとしたことなどなど。</p>
+            <a href="/create" role="button" class="btn btn-info d-inline-block me-2">新規作成</a>
+            <form action="/logout" method="post" class="d-inline-block">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-warning">ログアウト</button>
+            </form>
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            {% for post in posts %}
+            <div class="col">
+                <div class="card">
+                    {% if post.img_name %}
+                        <img src="{{ url_for('static',filename='img/' + post.img_name)}}" class="card-img-top">
+                    {% else %}
+                        <img src="{{ url_for('static',filename='img/default.png')}}" class="card-img-top">
+                    {% endif %}
+                    <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.body[:10] }}</p>
+                    <p>投稿日: {{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                    <div class="d-flex gap-2 align-items-center">
+                    <a href="/{{ post.id }}/update" class="btn btn-success">更新</a>
+                    <form action="/{{ post.id }}/delete" method="post" style="display:inline-block; margin:0;">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-danger">削除</button>
+                    </form>
+                    <a href="{{ url_for('readmore',post_id=post.id)}}" class="btn btn-primary">詳細</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock %}

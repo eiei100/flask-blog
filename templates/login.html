@@ -1,0 +1,40 @@
+    {% extends "base.html" %}
+    {% block title %}
+    ログイン
+    {% endblock %}
+    {% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                    <h3 class="card-title text-center">ログイン</h3>
+                    {% if messages %}
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                        {% for msg in messages %}
+                            <li>{{ msg }}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <form method="post">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">ユーザー名</label>
+                            <input type="text" name="username" id="username" class="form-control" placeholder="ユーザー名">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">パスワード</label>
+                            <input type="text" name="password" id="password" class="form-control" placeholder="パスワード">
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" value="ログイン" class="btn btn-primary w-100">
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

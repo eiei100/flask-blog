@@ -1,0 +1,48 @@
+    {% extends "base.html" %}
+    {% block title %}
+    記事の詳細
+    {% endblock %}
+    {% block content %}
+<div class="container my-4">
+    <div class="mb-4">
+        <div class="balance">
+            <!--　左：メインコンテンツ　-->
+            <div class="main-content">
+            <article>
+            <h2 class="text-center">{{ post.title }}</h2>
+            <div class="date_link">
+            <p>{{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+            <a href="/">一覧に戻る</a>
+            </div>
+            <br>
+                {% if post.img_name %}
+                <div class="text-center my-3">
+                <img src="{{ url_for('static',filename='img/' + post.img_name)}}" class="article-img img-fluid" alt="記事画像">
+                </div>
+                {% endif %}
+            <p>{{ post.body }}</p>
+            </article>
+            </div>
+
+                <!--　右：サブバー　-->
+                <div class="sidebar">
+                    <h4>プロフィール</h4>
+                    <hr>
+                    <p>情報系の大学生、最近Web系に興味が湧いたので勉強中。<br>
+                    好きなことは、ゲームとギター。あとイラストもぼちぼち。
+                    </p>
+                    <div class="link_img_min">
+                        <a href="/" target="_blank">
+                            <img src="{{ url_for('static', filename='img/house.png') }}">
+                        </a>
+                        <a href="https://x.com/kanikama1357" target="_blank">
+                            <img src="{{ url_for('static', filename='img/x.png') }}">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+    {% endblock %}

@@ -1,0 +1,21 @@
+[project]
+name = "flask-blog"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Eiji Kishimoto",email = "e245739@ie.u-ryukyu.ac.jp"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "psycopg[binary] (>=3.2.9,<4.0.0)",
+    "flask-sqlalchemy (>=3.1.1,<4.0.0)",
+    "pytz (>=2025.2,<2026.0)",
+    "flask-migrate (>=4.1.0,<5.0.0)",
+    "flask-login (>=0.6.3,<0.7.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
