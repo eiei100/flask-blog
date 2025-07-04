@@ -15,21 +15,16 @@ app = Flask(__name__)
 
 csrf = CSRFProtect(app)
 
-#1.一旦ランダム、本番環境では書き換える
-app.config["SECRET_KEY"] = os.urandom(24)
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev_secret_key")
 
 #2.ログイン管理システム
 login_manager = LoginManager()
 login_manager.init_app(app)
 
 db = SQLAlchemy()
-DB_INFO = {"user":"eiei",
-           "password":"",
-    "host":"localhost",
-    "name":"postgres"
-}
-SQLALCHEMY_DATABASE_URI = "postgresql+psycopg://{user}:{password}@{host}/{name}".format(**DB_INFO)
-app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
+    "DATABASE_URL", "postgresql+psycopg://eiei:@localhost/postgres"
+)
 db.init_app(app)
 
 migrate = Migrate(app,db)
@@ -164,4 +159,5 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect("/login")
+    return redirect("/")
+
