@@ -11,7 +11,7 @@
             <article>
             <h2 class="text-center">{{ post.title }}</h2>
             <div class="date_link">
-            <p>{{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+            <p>{{ post.created_at.strftime('%Y-%m-%d') }}</p>
             <a href="/">一覧に戻る</a>
             </div>
             <br>
@@ -20,7 +20,9 @@
                 <img src="{{ url_for('static',filename='img/' + post.img_name)}}" class="article-img img-fluid" alt="記事画像">
                 </div>
                 {% endif %}
-            <p>{{ post.body }}</p>
+            <div class="post-body">
+            <p>{{ html_body | safe }}</p>
+            </div>
             </article>
             </div>
 

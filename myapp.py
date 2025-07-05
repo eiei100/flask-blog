@@ -6,7 +6,9 @@ from flask_wtf.csrf import CSRFProtect
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 import pytz
+import markdown
 from datetime import datetime
+from markupsafe import Markup
 
 import os
 from dotenv import load_dotenv
@@ -121,7 +123,8 @@ def index():
 @app.route("/<int:post_id>/content")
 def readmore(post_id):
     post = Post.query.get_or_404(post_id)
-    return render_template("readmore.html",post=post)
+    html_body = Markup(markdown.markdown(post.body))
+    return render_template("readmore.html",post=post,html_body=html_body)
 
 @app.route("/signup", methods=["GET","POST"])
 def signup():

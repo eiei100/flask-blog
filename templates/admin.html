@@ -26,7 +26,7 @@
                     <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body[:10] }}</p>
-                    <p>投稿日: {{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                    <p>投稿日: {{ post.created_at.strftime('%Y-%m-%d') }}</p>
                     <div class="d-flex gap-2 align-items-center">
                     <a href="/{{ post.id }}/update" class="btn btn-success">更新</a>
                     <form action="/{{ post.id }}/delete" method="post" style="display:inline-block; margin:0;">
